@@ -3,6 +3,10 @@ import 'package:shopy/constants.dart';
 import 'package:shopy/core/utils/assetData.dart';
 import 'package:shopy/core/widgets/custom_button.dart';
 
+import 'logo_widget.dart';
+import 'signIn_widget.dart';
+import 'signUp_widget.dart';
+
 class IntroViewBody extends StatefulWidget {
   const IntroViewBody({super.key});
 
@@ -30,48 +34,17 @@ class _IntroViewBodyState extends State<IntroViewBody>
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Spacer(
+          const Spacer(
             flex: 2,
           ),
-          AnimatedBuilder(
-            animation: slidingAnimation,
-            builder: (context, child) => SlideTransition(
-              position: slidingAnimation,
-              child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  child: Image.asset(AssetData.logo)),
-            ),
-          ),
-          Spacer(),
-          AnimatedBuilder(
-            animation: slidingAnimation,
-            builder: (context, child) => SlideTransition(
-              position: slidingAnimation,
-              child: CustomButton(
-                text: 'Sign Up',
-                color: Colors.white,
-                textColor: kPrimaryColor,
-                onPressed: () {},
-              ),
-            ),
-          ),
+          LogoWidget(slidingAnimation: slidingAnimation),
+          const Spacer(),
+          SignUpWidget(slidingAnimation: slidingAnimation),
           const SizedBox(
             height: 5,
           ),
-          AnimatedBuilder(
-            animation: slidingAnimation,
-            builder: (context, child) => SlideTransition(
-              position: slidingAnimation,
-              child: CustomButton(
-                isElevated: false,
-                text: 'Sign in',
-                textColor: Colors.white,
-                color: kPrimaryColor,
-                onPressed: () {},
-              ),
-            ),
-          ),
-          SizedBox(
+          SignInWidget(slidingAnimation: slidingAnimation),
+          const SizedBox(
             height: 55,
           )
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopy/features/splash/presentation/views/intro_view.dart';
+import 'package:shopy/features/intro/presentation/views/intro_view.dart';
 
 import 'core/utils/app_router.dart';
 

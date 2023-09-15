@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 
-import '../../features/splash/presentation/views/intro_view.dart';
+import '../../features/intro/presentation/views/intro_view.dart';
 
 // GoRouter configuration
 final router = GoRouter(
