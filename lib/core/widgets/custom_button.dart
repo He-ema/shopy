@@ -18,6 +18,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      minWidth: double.infinity,
       onPressed: onPressed,
       height: 60,
       elevation: isElevated ? 2 : 0,

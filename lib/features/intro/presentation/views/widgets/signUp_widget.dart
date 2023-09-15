@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shopy/core/utils/app_router.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/widgets/custom_button.dart';
@@ -21,7 +23,9 @@ class SignUpWidget extends StatelessWidget {
           text: 'Sign Up',
           color: Colors.white,
           textColor: kPrimaryColor,
-          onPressed: () {},
+          onPressed: () {
+            GoRouter.of(context).push(AppRouter.signUpRoute);
+          },
         ),
       ),
     );
