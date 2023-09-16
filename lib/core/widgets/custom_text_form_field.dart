@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:shopy/core/utils/styles.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     required this.hint,
+    this.isHidden = false,
   });
   final String hint;
+  final bool isHidden;
+
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool isObsecured = true;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -17,10 +27,23 @@ class CustomTextFormField extends StatelessWidget {
           return null;
         }
       },
+      obscureText: (widget.isHidden && isObsecured) ? true : false,
       decoration: InputDecoration(
+        suffixIcon: widget.isHidden
+            ? GestureDetector(
+                onTap: () {
+                  isObsecured = !isObsecured;
+                  setState(() {});
+                },
+                child: Icon(
+                  isObsecured ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.grey,
+                ),
+              )
+            : null,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 14, vertical: 22),
-        hintText: hint,
+        hintText: widget.hint,
         hintStyle: styles.textStyle14.copyWith(color: const Color(0xffD5DDE0)),
         focusedBorder: CreateBorder(),
         filled: true,

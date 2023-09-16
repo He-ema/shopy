@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/styles.dart';
 
 import '../../../../../core/widgets/custom_app_bar.dart';
@@ -66,7 +64,10 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               const SizedBox(
                 height: 9,
               ),
-              const CustomTextFormField(hint: '*************'),
+              const CustomTextFormField(
+                hint: '*************',
+                isHidden: true,
+              ),
               const SizedBox(
                 height: 35,
               ),

@@ -67,7 +67,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 9,
               ),
-              const CustomTextFormField(hint: '*************'),
+              const CustomTextFormField(
+                hint: '*************',
+                isHidden: true,
+              ),
               const SizedBox(
                 height: 44,
               ),
