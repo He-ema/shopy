@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopy/simple_bloc_observer.dart';
 
 import 'core/utils/app_router.dart';
 import 'firebase_options.dart';
@@ -12,6 +14,8 @@ void main() async {
   );
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 
