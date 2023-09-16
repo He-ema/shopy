@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopy/constants.dart';
-import 'package:shopy/core/utils/assetData.dart';
-import 'package:shopy/core/widgets/custom_button.dart';
-
 import 'logo_widget.dart';
 import 'signIn_widget.dart';
 import 'signUp_widget.dart';
@@ -24,6 +20,13 @@ class _IntroViewBodyState extends State<IntroViewBody>
     // TODO: implement initState
     super.initState();
     initSlidingAnimation();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    animationController.dispose();
   }
 
   @override
