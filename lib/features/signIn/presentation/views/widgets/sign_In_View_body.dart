@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/styles.dart';
-import 'package:shopy/core/widgets/custom_button.dart';
 
 import '../../../../../core/widgets/custom_app_bar.dart';
+import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_or_widget.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/google_register.dart';
-import 'already_have_an_account.dart';
+import 'doesnot_have_account.dart';
+import 'forgot_password.dart';
 
-class SignUpViewBody extends StatefulWidget {
-  const SignUpViewBody({super.key});
+class SignInViewBody extends StatefulWidget {
+  const SignInViewBody({super.key});
 
   @override
-  State<SignUpViewBody> createState() => _SignUpViewBodyState();
+  State<SignInViewBody> createState() => _SignInViewBodyState();
 }
 
-class _SignUpViewBodyState extends State<SignUpViewBody> {
+class _SignInViewBodyState extends State<SignInViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
@@ -34,20 +37,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 30,
               ),
-              const CustomAppBar(text: 'Sign Up'),
+              const CustomAppBar(text: 'Sign In'),
               const SizedBox(
-                height: 54,
+                height: 16,
               ),
               const Text(
-                'Name',
-                style: styles.textStyle14,
+                'Please fill E-mail & password to login your Shopy application account.',
+                style: styles.textStyle13,
               ),
               const SizedBox(
-                height: 9,
-              ),
-              const CustomTextFormField(hint: 'John Doe'),
-              const SizedBox(
-                height: 20,
+                height: 70,
               ),
               const Text(
                 'E-mail',
@@ -69,10 +68,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               ),
               const CustomTextFormField(hint: '*************'),
               const SizedBox(
-                height: 44,
+                height: 35,
+              ),
+              const ForgotPassword(),
+              const SizedBox(
+                height: 35,
               ),
               CustomButton(
-                text: 'Sign Up',
+                text: 'Sign In',
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                   } else {
@@ -92,7 +95,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 28,
               ),
-              const AlreadyHavaAnAccount(),
+              const DoesnotHavaAccount(),
               const SizedBox(
                 height: 10,
               ),

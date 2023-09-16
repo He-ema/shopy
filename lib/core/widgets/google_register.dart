@@ -8,20 +8,23 @@ class GoogleLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(20),
-      margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.25),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        color: Color(
-          0xffD5DDE0,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        margin: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.25),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          color: const Color(
+            0xffD5DDE0,
+          ),
         ),
-      ),
-      child: Image.asset(
-        AssetData.google,
-        height: 25,
+        child: Image.asset(
+          AssetData.google,
+          height: 25,
+        ),
       ),
     );
   }

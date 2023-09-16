@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopy/core/utils/styles.dart';
+import 'package:shopy/features/intro/presentation/views/widgets/intro_view_body.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({

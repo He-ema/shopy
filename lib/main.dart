@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shopy/features/intro/presentation/views/intro_view.dart';
 
 import 'core/utils/app_router.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
 }
 

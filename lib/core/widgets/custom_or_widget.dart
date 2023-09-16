@@ -11,21 +11,21 @@ class CustomOrWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
+        const Expanded(
           child: Divider(
             color: Colors.grey,
             thickness: 0.5,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
         Text('Or sign up with',
             style: styles.textStyle14.copyWith(fontWeight: FontWeight.w600)),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
-        Expanded(
+        const Expanded(
           child: Divider(
             color: Colors.grey,
             thickness: 0.5,
