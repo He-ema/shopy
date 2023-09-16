@@ -1,17 +1,22 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
-import 'package:shopy/core/utils/functions/awesome_dialouge.dart';
+import '../../../../constants.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
+  final CollectionReference _users =
+      FirebaseFirestore.instance.collection(kUsersCollectionReference);
+
   Future<void> signInwithEmail(
       {required String email,
       required String password,
+      required String name,
       required context}) async {
     emit(AuthLoading());
     try {
@@ -19,6 +24,10 @@ class AuthCubit extends Cubit<AuthState> {
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
+      );
+      await createUser(
+        email: email,
+        name: name,
       );
       emit(AuthSuccess());
     } on FirebaseAuthException catch (e) {
@@ -80,8 +89,38 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       // Once signed in, return the UserCredential
+      var doc = _users.doc(googleUser!.email);
+      await doc.get().then((doc) async {
+        if (doc.exists) {
+          await createUser(
+              email: googleUser!.email,
+              name: googleUser.displayName!,
+              image: googleUser.photoUrl);
+        } else {}
+      });
+
       emit(AuthSuccess());
       return await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      emit(AuthFailure(
+          erroHeader: 'Error',
+          errorMessage: 'Something went wrong , try again'));
+    }
+  }
+
+  Future<void> createUser(
+      {required String email,
+      required String name,
+      @required String? image}) async {
+    emit(AuthLoading());
+    try {
+      await _users.doc(email).set({
+        kName: name,
+        kEmail: email,
+        kImage: image ??
+            'https://firebasestorage.googleapis.com/v0/b/shopy-7831e.appspot.com/o/avatar.png?alt=media&token=05347550-2843-41d0-9251-a907316f4823',
+      });
+      emit(AuthSuccess());
     } catch (e) {
       emit(AuthFailure(
           erroHeader: 'Error',
