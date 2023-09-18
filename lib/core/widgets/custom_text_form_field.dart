@@ -6,9 +6,11 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     required this.hint,
     this.isHidden = false,
+    this.controller,
   });
   final String hint;
   final bool isHidden;
+  final TextEditingController? controller;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -27,6 +29,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           return null;
         }
       },
+      controller: widget.controller,
       obscureText: (widget.isHidden && isObsecured) ? true : false,
       decoration: InputDecoration(
         suffixIcon: widget.isHidden

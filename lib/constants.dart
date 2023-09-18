@@ -5,3 +5,4 @@ const kUsersCollectionReference = 'users';
 const kName = 'name';
 const kEmail = 'email';
 const kImage = 'image';
+const kVerified = 'isVerified';

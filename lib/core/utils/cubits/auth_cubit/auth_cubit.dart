@@ -13,11 +13,11 @@ class AuthCubit extends Cubit<AuthState> {
   final CollectionReference _users =
       FirebaseFirestore.instance.collection(kUsersCollectionReference);
 
-  Future<void> signInwithEmail(
-      {required String email,
-      required String password,
-      required String name,
-      required context}) async {
+  Future<void> signInwithEmail({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     emit(AuthLoading());
     try {
       UserCredential userCredential =
@@ -28,6 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
       await createUser(
         email: email,
         name: name,
+        verified: false,
       );
       emit(AuthSuccess());
     } on FirebaseAuthException catch (e) {
@@ -47,10 +48,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> loginWithEmailAndPassword(
-      {required String email,
-      required String password,
-      required context}) async {
+  Future<void> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     emit(AuthLoading());
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -73,7 +74,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  dynamic signInWithGoogle({required context}) async {
+  dynamic signInWithGoogle() async {
     emit(AuthLoading());
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -93,9 +94,11 @@ class AuthCubit extends Cubit<AuthState> {
       await doc.get().then((doc) async {
         if (doc.exists) {
           await createUser(
-              email: googleUser!.email,
-              name: googleUser.displayName!,
-              image: googleUser.photoUrl);
+            email: googleUser!.email,
+            name: googleUser.displayName!,
+            image: googleUser.photoUrl,
+            verified: true,
+          );
         } else {}
       });
 
@@ -108,10 +111,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> createUser(
-      {required String email,
-      required String name,
-      @required String? image}) async {
+  Future<void> createUser({
+    required String email,
+    required String name,
+    required bool verified,
+    @required String? image,
+  }) async {
     emit(AuthLoading());
     try {
       await _users.doc(email).set({
@@ -119,6 +124,7 @@ class AuthCubit extends Cubit<AuthState> {
         kEmail: email,
         kImage: image ??
             'https://firebasestorage.googleapis.com/v0/b/shopy-7831e.appspot.com/o/avatar.png?alt=media&token=05347550-2843-41d0-9251-a907316f4823',
+        kVerified: verified,
       });
       emit(AuthSuccess());
     } catch (e) {

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shopy/core/utils/cubits/auth_cubit/auth_cubit.dart';
+import 'package:shopy/core/utils/functions/awesome_dialouge.dart';
 import 'package:shopy/core/utils/styles.dart';
 
 import '../../../../../core/widgets/custom_app_bar.dart';
@@ -6,6 +10,7 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_or_widget.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/google_register.dart';
+import '../../../../../core/widgets/loading_widget.dart';
 import 'doesnot_have_account.dart';
 import 'forgot_password.dart';
 
@@ -19,7 +24,6 @@ class SignInViewBody extends StatefulWidget {
 class _SignInViewBodyState extends State<SignInViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
