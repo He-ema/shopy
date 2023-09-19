@@ -9,7 +9,8 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-
+  bool signedWithGoogle = true;
+  String? email;
   final CollectionReference _users =
       FirebaseFirestore.instance.collection(kUsersCollectionReference);
 
@@ -30,6 +31,8 @@ class AuthCubit extends Cubit<AuthState> {
         name: name,
         verified: false,
       );
+      this.email = email;
+      signedWithGoogle = false;
       emit(AuthSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -101,7 +104,8 @@ class AuthCubit extends Cubit<AuthState> {
           );
         } else {}
       });
-
+      email = googleUser.email;
+      signedWithGoogle = true;
       emit(AuthSuccess());
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {

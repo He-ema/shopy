@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/cubits/auth_cubit/auth_cubit.dart';
 import 'package:shopy/core/utils/functions/awesome_dialouge.dart';
 import 'package:shopy/core/utils/styles.dart';
@@ -40,6 +42,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
+          if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
+            GoRouter.of(context).pushReplacement(AppRouter.homeRoute);
+          } else {
+            GoRouter.of(context).push(AppRouter.OTPRoute,
+                extra: BlocProvider.of<AuthCubit>(context).email);
+          }
         } else if (state is AuthFailure) {
           isLoading = false;
           ShowAwesomeDialouge(
