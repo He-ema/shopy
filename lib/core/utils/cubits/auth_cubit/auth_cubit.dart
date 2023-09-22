@@ -10,6 +10,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   bool signedWithGoogle = true;
+  bool verified = false;
   String? email;
   final CollectionReference _users =
       FirebaseFirestore.instance.collection(kUsersCollectionReference);
@@ -59,6 +60,10 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      this.email = email;
+      signedWithGoogle = false;
+      var data = await _users.doc(email).get();
+      verified = data[kVerified];
       emit(AuthSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
