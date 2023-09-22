@@ -7,7 +7,7 @@ class SuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SuccessViewBody(),
+      body: SuccessViewBody(email: email),
     );
   }
 }

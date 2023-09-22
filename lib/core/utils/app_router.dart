@@ -31,7 +31,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: homeRoute,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => HomeView(email: state.extra as String),
       ),
       GoRoute(
         path: OTPRoute,

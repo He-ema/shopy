@@ -44,7 +44,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         if (state is AuthSuccess) {
           isLoading = false;
           if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
-            GoRouter.of(context).pushReplacement(AppRouter.homeRoute);
+            GoRouter.of(context).pushReplacement(AppRouter.successRoute,
+                extra: BlocProvider.of<AuthCubit>(context).email);
           } else {
             GoRouter.of(context).push(AppRouter.OTPRoute,
                 extra: BlocProvider.of<AuthCubit>(context).email);
@@ -149,7 +150,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     const SizedBox(
                       height: 28,
                     ),
-                    const GoogleLogin(),
+                    GoogleLogin(
+                      onTap: () async {
+                        await BlocProvider.of<AuthCubit>(context)
+                            .signInWithGoogle();
+                      },
+                    ),
                     const SizedBox(
                       height: 28,
                     ),

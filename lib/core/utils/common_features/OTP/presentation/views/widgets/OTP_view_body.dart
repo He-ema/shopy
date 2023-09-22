@@ -45,6 +45,16 @@ class _OTPViewBodyState extends State<OTPViewBody> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+    _controller2.dispose();
+    _controller3.dispose();
+    _controller4.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 35, right: 35, bottom: 35),

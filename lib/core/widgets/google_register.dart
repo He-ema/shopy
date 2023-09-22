@@ -4,12 +4,13 @@ import 'package:shopy/core/utils/assetData.dart';
 class GoogleLogin extends StatelessWidget {
   const GoogleLogin({
     super.key,
+    this.onTap,
   });
-
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(20),

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/assetData.dart';
+import 'package:shopy/core/utils/cubits/auth_cubit/auth_cubit.dart';
 import 'package:shopy/core/utils/styles.dart';
 
 class SuccessViewBody extends StatefulWidget {
-  const SuccessViewBody({super.key});
-
+  const SuccessViewBody({super.key, required this.email});
+  final String email;
   @override
   State<SuccessViewBody> createState() => _SuccessViewBodyState();
 }
@@ -17,8 +18,16 @@ class _SuccessViewBodyState extends State<SuccessViewBody> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      GoRouter.of(context).pushReplacement(AppRouter.homeRoute);
+      GoRouter.of(context)
+          .pushReplacement(AppRouter.homeRoute, extra: widget.email);
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    AuthCubit().close();
   }
 
   @override

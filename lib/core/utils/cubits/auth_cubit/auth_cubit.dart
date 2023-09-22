@@ -96,13 +96,14 @@ class AuthCubit extends Cubit<AuthState> {
       var doc = _users.doc(googleUser!.email);
       await doc.get().then((doc) async {
         if (doc.exists) {
+        } else {
           await createUser(
-            email: googleUser!.email,
+            email: googleUser.email,
             name: googleUser.displayName!,
             image: googleUser.photoUrl,
             verified: true,
           );
-        } else {}
+        }
       });
       email = googleUser.email;
       signedWithGoogle = true;
