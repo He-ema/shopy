@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:shopy/constants.dart';
 
 void ShowAwesomeDialouge(
-    {required context, required String body, required String desctiption}) {
+    {required context,
+    required String body,
+    required String desctiption,
+    @required DialogType? dialogType}) {
   AwesomeDialog(
     context: context,
     animType: AnimType.scale,
-    dialogType: DialogType.info,
+    dialogType: dialogType ?? DialogType.info,
     title: body,
     desc: desctiption,
     btnOkOnPress: () {},

@@ -130,7 +130,6 @@ class AuthCubit extends Cubit<AuthState> {
             'https://firebasestorage.googleapis.com/v0/b/shopy-7831e.appspot.com/o/avatar.png?alt=media&token=05347550-2843-41d0-9251-a907316f4823',
         kVerified: verified,
       });
-      emit(AuthSuccess());
     } catch (e) {
       emit(AuthFailure(
           erroHeader: 'Error',

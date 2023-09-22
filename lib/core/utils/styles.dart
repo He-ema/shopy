@@ -25,4 +25,9 @@ abstract class styles {
     fontSize: 13,
     fontFamily: 'Montserrat',
   );
+  static const textStyle18 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Montserrat',
+  );
 }
