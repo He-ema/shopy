@@ -22,6 +22,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       validator: (value) {
         if (value!.isEmpty ?? true) {
           return 'This field can\'t be empty';

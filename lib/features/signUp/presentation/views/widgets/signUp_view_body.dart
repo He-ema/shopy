@@ -42,6 +42,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
+          isLoading = false;
           if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
             GoRouter.of(context).pushReplacement(AppRouter.homeRoute);
           } else {
@@ -74,7 +75,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     const SizedBox(
                       height: 30,
                     ),
-                    const CustomAppBar(text: 'Sign Up'),
+                    CustomAppBar(
+                      text: 'Sign Up',
+                      onPressed: () {
+                        GoRouter.of(context).pushReplacement('/');
+                      },
+                    ),
                     const SizedBox(
                       height: 54,
                     ),

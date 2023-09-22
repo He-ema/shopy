@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:shopy/core/utils/cubits/auth_cubit/auth_cubit.dart';
 import 'package:shopy/core/utils/functions/awesome_dialouge.dart';
@@ -39,7 +40,11 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               const SizedBox(
                 height: 30,
               ),
-              const CustomAppBar(text: 'Sign In'),
+              CustomAppBar(
+                  text: 'Sign In',
+                  onPressed: () {
+                    GoRouter.of(context).pushReplacement('/');
+                  }),
               const SizedBox(
                 height: 16,
               ),

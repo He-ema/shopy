@@ -19,6 +19,7 @@ class OTPViewBody extends StatefulWidget {
 
 class _OTPViewBodyState extends State<OTPViewBody> {
   EmailOTP myauth = EmailOTP();
+  String OTPValue = '1234';
   bool isFalse = false;
   @override
   void initState() {
@@ -61,6 +62,7 @@ class _OTPViewBodyState extends State<OTPViewBody> {
                 onSaved: (p0) {},
                 onChanged: (value) {
                   if (value.length == 1) {
+                    OTPValue = OTPValue.replaceRange(0, 1, value);
                     FocusScope.of(context).nextFocus();
                   }
                 },
@@ -70,6 +72,7 @@ class _OTPViewBodyState extends State<OTPViewBody> {
                 onSaved: (p0) {},
                 onChanged: (value) {
                   if (value.length == 1) {
+                    OTPValue = OTPValue.replaceRange(1, 2, value);
                     FocusScope.of(context).nextFocus();
                   }
                 },
@@ -79,6 +82,7 @@ class _OTPViewBodyState extends State<OTPViewBody> {
                 onSaved: (p0) {},
                 onChanged: (value) {
                   if (value.length == 1) {
+                    OTPValue = OTPValue.replaceRange(2, 3, value);
                     FocusScope.of(context).nextFocus();
                   }
                 },
@@ -88,6 +92,7 @@ class _OTPViewBodyState extends State<OTPViewBody> {
                 onSaved: (p0) {},
                 onChanged: (value) {
                   if (value.length == 1) {
+                    OTPValue = OTPValue.replaceRange(3, 4, value);
                     FocusScope.of(context).nextFocus();
                   }
                 },
@@ -97,7 +102,10 @@ class _OTPViewBodyState extends State<OTPViewBody> {
           Spacer(),
           CustomButton(
             text: 'Send Another Code',
-            onPressed: () {},
+            onPressed: () async {
+              await myauth.verifyOTP(otp: OTPValue);
+              print(OTPValue);
+            },
           )
         ],
       ),
