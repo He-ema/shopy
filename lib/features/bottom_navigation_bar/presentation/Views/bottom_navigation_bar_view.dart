@@ -37,20 +37,29 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
         currentIndex: currentIndex,
 
         type: BottomNavigationBarType.fixed,
+        elevation: 8,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedIconTheme: IconThemeData(
+        selectedIconTheme: const IconThemeData(
           color: Colors.black,
-          size: 25,
+          size: 29,
         ),
-        unselectedIconTheme: IconThemeData(color: Colors.grey.withOpacity(0.7)),
+        unselectedIconTheme:
+            IconThemeData(color: Colors.grey.withOpacity(0.7), size: 25),
         // currentIndex: ,
         fixedColor: Colors.white,
         backgroundColor: Colors.white,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.house_outlined), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'wish'),
+              icon: Icon(
+                Icons.house,
+              ),
+              label: 'home'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.favorite,
+              ),
+              label: 'wish'),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag), label: 'cart'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
