@@ -6,4 +6,5 @@ class AssetData {
   static const women = 'assets/images/women.png';
   static const kids = 'assets/images/kids.png';
   static const sale = 'assets/images/sale.png';
+  static const test = 'assets/images/test.png';
 }

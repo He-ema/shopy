@@ -41,8 +41,8 @@ class _PageViewImageState extends State<PageViewImage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 35),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 30),
-        height: 200,
+        margin: const EdgeInsets.only(top: 25, bottom: 10),
+        height: 150,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(19),
           color: Colors.white,
@@ -56,13 +56,33 @@ class _PageViewImageState extends State<PageViewImage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             Container(
-              height: 160,
+              height: 100,
               child: PageView(
                 children: [
-                  Image.asset(AssetData.success),
-                  Image.asset(AssetData.success),
-                  Image.asset(AssetData.success),
+                  Row(
+                    children: [
+                      Image.asset(AssetData.test),
+                      Text('Air Max 2090'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        AssetData.test,
+                      ),
+                      Text('Air Max 2090'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(AssetData.test),
+                      Text('Air Max 2090'),
+                    ],
+                  ),
                 ],
                 controller: _controller,
                 onPageChanged: (value) {
@@ -71,9 +91,7 @@ class _PageViewImageState extends State<PageViewImage> {
                 },
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -87,7 +105,10 @@ class _PageViewImageState extends State<PageViewImage> {
                               : kPrimaryColor.withOpacity(0.5),
                         ),
                       )),
-            )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),

@@ -5,18 +5,26 @@ import '../../../../../constants.dart';
 class ClippedRectangle extends StatelessWidget {
   const ClippedRectangle({
     super.key,
+    this.bottom = false,
   });
-
+  final bool bottom;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: bottom
+          ? MediaQuery.of(context).size.height * 0.35
+          : MediaQuery.of(context).size.height * 0.30,
       width: double.infinity,
-      decoration: const BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(38),
-              bottomRight: Radius.circular(38))),
+      decoration: BoxDecoration(
+          color: bottom ? const Color(0xffF7F8F9) : kPrimaryColor,
+          borderRadius: bottom
+              ? const BorderRadius.only(
+                  topLeft: Radius.circular(38),
+                  topRight: Radius.circular(38),
+                )
+              : const BorderRadius.only(
+                  bottomLeft: Radius.circular(38),
+                  bottomRight: Radius.circular(38))),
     );
   }
 }
