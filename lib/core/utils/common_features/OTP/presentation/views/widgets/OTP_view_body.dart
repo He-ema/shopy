@@ -24,10 +24,10 @@ class OTPViewBody extends StatefulWidget {
 }
 
 class _OTPViewBodyState extends State<OTPViewBody> {
-  TextEditingController _controller = TextEditingController();
-  TextEditingController _controller2 = TextEditingController();
-  TextEditingController _controller3 = TextEditingController();
-  TextEditingController _controller4 = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
   EmailOTP myauth = EmailOTP();
   String OTPValue = '1234';
   bool isFalse = false;
@@ -36,8 +36,8 @@ class _OTPViewBodyState extends State<OTPViewBody> {
     // TODO: implement initState
     super.initState();
     myauth.setConfig(
-        appEmail: "Food@gmail.com",
-        appName: "Food",
+        appEmail: "Shopy@gmail.com",
+        appName: "Shopy",
         userEmail: widget.email,
         otpLength: 4,
         otpType: OTPType.digitsOnly);

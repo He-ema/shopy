@@ -4,7 +4,7 @@ import 'package:shopy/core/utils/common_features/success/presentation/view_model
 import 'package:shopy/features/signIn/presentation/views/signIn_view.dart';
 import 'package:shopy/features/signUp/presentation/views/signUp_view.dart';
 
-import '../../features/home/presentation/Views/home_view.dart';
+import '../../features/bottom_navigation_bar/presentation/Views/bottom_navigation_bar_view.dart';
 import '../../features/intro/presentation/views/intro_view.dart';
 import '../../features/signIn/presentation/views/enter_forgotten_email.dart';
 
@@ -33,7 +33,8 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: homeRoute,
-        builder: (context, state) => HomeView(email: state.extra as String),
+        builder: (context, state) =>
+            BottomNavigationBarView(email: state.extra as String),
       ),
       GoRoute(
         path: OTPRoute,

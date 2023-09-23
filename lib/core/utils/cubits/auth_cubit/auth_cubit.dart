@@ -139,7 +139,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(AuthFailure(
           erroHeader: 'Error',
-          errorMessage: 'Something went wrong , try again'));
+          errorMessage: 'Error creating user , try again'));
     }
   }
 }
