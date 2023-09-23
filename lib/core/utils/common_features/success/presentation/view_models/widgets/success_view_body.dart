@@ -27,7 +27,6 @@ class _SuccessViewBodyState extends State<SuccessViewBody> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    AuthCubit().close();
   }
 
   @override

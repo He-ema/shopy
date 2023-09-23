@@ -44,7 +44,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         if (state is AuthSuccess) {
           isLoading = false;
           if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
-            GoRouter.of(context).pushReplacement(AppRouter.successRoute,
+            GoRouter.of(context).push(AppRouter.successRoute,
                 extra: BlocProvider.of<AuthCubit>(context).email);
           } else {
             GoRouter.of(context).push(AppRouter.OTPRoute,

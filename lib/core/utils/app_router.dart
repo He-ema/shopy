@@ -6,6 +6,7 @@ import 'package:shopy/features/signUp/presentation/views/signUp_view.dart';
 
 import '../../features/home/presentation/Views/home_view.dart';
 import '../../features/intro/presentation/views/intro_view.dart';
+import '../../features/signIn/presentation/views/enter_forgotten_email.dart';
 
 abstract class AppRouter {
   static const signUpRoute = '/signUp';
@@ -13,6 +14,7 @@ abstract class AppRouter {
   static const homeRoute = '/homeView';
   static const OTPRoute = '/OTPView';
   static const successRoute = '/successView';
+  static const forgotPasswordRoute = '/fprgotPass';
 
 // GoRouter configuration
   static final router = GoRouter(
@@ -40,6 +42,10 @@ abstract class AppRouter {
       GoRoute(
         path: successRoute,
         builder: (context, state) => SuccessView(email: state.extra as String),
+      ),
+      GoRoute(
+        path: forgotPasswordRoute,
+        builder: (context, state) => const EnterForgottenEmail(),
       ),
     ],
   );
