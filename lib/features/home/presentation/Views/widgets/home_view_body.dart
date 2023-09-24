@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/core/widgets/custom_button.dart';
-import 'package:shopy/features/home/data/services/get_all_products_service.dart';
+import 'package:shopy/features/home/data/repos/home_repo_implementation.dart';
+import 'package:shopy/features/home/data/services/api_service.dart';
 import 'package:shopy/features/home/presentation/views/widgets/list_view_item.dart';
 import 'package:shopy/features/home/presentation/views/widgets/page_view_image.dart';
 import 'categories_row.dart';
@@ -19,7 +21,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    GetAllProducrService().getAllProduct();
   }
 
   @override
@@ -52,7 +53,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                             width: 100,
                             height: 30,
                             child: CustomButton(
-                                text: 'View All', onPressed: () {}),
+                                text: 'View All',
+                                onPressed: () async {
+                                  await HomeRepoImplementation(
+                                          ApiService(Dio()))
+                                      .getProducts();
+                                }),
                           )
                         ],
                       ),

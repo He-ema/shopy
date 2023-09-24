@@ -31,6 +31,8 @@ dependencies:
   awesome_dialog: ^3.1.0
   cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
+  dio: ^5.3.3
   email_otp: ^2.0.1
   equatable: ^2.0.5
   firebase_auth: ^4.9.0
