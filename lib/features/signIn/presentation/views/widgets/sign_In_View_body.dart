@@ -1,5 +1,4 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -9,7 +8,6 @@ import 'package:shopy/core/utils/cubits/auth_cubit/auth_cubit.dart';
 import 'package:shopy/core/utils/functions/awesome_dialouge.dart';
 import 'package:shopy/core/utils/styles.dart';
 
-import '../../../../../constants.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_or_widget.dart';

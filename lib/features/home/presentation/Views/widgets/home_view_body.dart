@@ -10,37 +10,42 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ClippedRectangle(),
-        Positioned(
+        const ClippedRectangle(),
+        const Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             child: ClippedRectangle(bottom: true)),
         Column(
           children: [
-            SizedBox(
-              height: 63,
+            const SizedBox(
+              height: 40,
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 35),
               child: SearchAndCamera(),
             ),
-            SizedBox(
+            const SizedBox(
+              height: 6,
+            ),
+            const PageViewImage(),
+            const SizedBox(
               height: 10,
             ),
-            PageViewImage(),
-            SizedBox(
-              height: 10,
-            ),
-            CategoriesRow(),
-            SizedBox(
+            const CategoriesRow(),
+            const SizedBox(
               height: 50,
             ),
-            Expanded(
+            Text('Newest'),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 250,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                itemBuilder: (context, index) => const Padding(
+                  padding: EdgeInsets.only(left: 10),
                   child: ListViewItem(),
                 ),
               ),

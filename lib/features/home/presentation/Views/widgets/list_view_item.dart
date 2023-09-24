@@ -27,10 +27,10 @@ class ListViewItem extends StatelessWidget {
               AssetData.test, fit: BoxFit.fitWidth,
               //width: 180,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Text(
+            const Text(
               'Nike React Miler',
               style: styles.textStyle14,
             ),
@@ -38,22 +38,22 @@ class ListViewItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  child: Text(
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.only(
+                    top: 3,
+                    bottom: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xffD5DDE0),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text(
                     '5 Colors',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 9,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Montserrat'),
-                  ),
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.only(
-                    top: 3,
-                    bottom: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xffD5DDE0),
-                    borderRadius: BorderRadius.circular(4),
                   ),
                 ),
               ],
@@ -63,16 +63,17 @@ class ListViewItem extends StatelessWidget {
                 Text(
                   '\$100',
                   style: styles.textStyle14.copyWith(
-                      fontWeight: FontWeight.bold, color: Color(0xff3E4958)),
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xff3E4958)),
                 ),
-                Spacer(),
+                const Spacer(),
                 GestureDetector(
-                  child: Icon(
+                  child: const Icon(
                     Icons.add,
                     size: 15,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 )
               ],

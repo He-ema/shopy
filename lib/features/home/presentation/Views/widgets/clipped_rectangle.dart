@@ -12,8 +12,8 @@ class ClippedRectangle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: bottom
-          ? MediaQuery.of(context).size.height * 0.35
-          : MediaQuery.of(context).size.height * 0.30,
+          ? MediaQuery.of(context).size.height * 0.41
+          : MediaQuery.of(context).size.height * 0.25,
       width: double.infinity,
       decoration: BoxDecoration(
           color: bottom ? const Color(0xffF7F8F9) : kPrimaryColor,

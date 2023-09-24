@@ -22,18 +22,27 @@ class _PageViewImageState extends State<PageViewImage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer.periodic(Duration(seconds: 3), (Timer timer) {
+    Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (currentIndex < 2) {
         currentIndex++;
       } else {
         currentIndex = 0;
       }
-      _controller.animateToPage(
-        currentIndex,
-        duration: Duration(seconds: 1),
-        curve: Curves.easeInOut,
-      );
+      if (_controller.hasClients) {
+        _controller.animateToPage(
+          currentIndex,
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeInOut,
+        );
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -66,7 +75,7 @@ class _PageViewImageState extends State<PageViewImage> {
                   Row(
                     children: [
                       Image.asset(AssetData.test),
-                      Text('Air Max 2090'),
+                      const Text('Air Max 2090'),
                     ],
                   ),
                   Row(
@@ -74,13 +83,13 @@ class _PageViewImageState extends State<PageViewImage> {
                       Image.asset(
                         AssetData.test,
                       ),
-                      Text('Air Max 2090'),
+                      const Text('Air Max 2090'),
                     ],
                   ),
                   Row(
                     children: [
                       Image.asset(AssetData.test),
-                      Text('Air Max 2090'),
+                      const Text('Air Max 2090'),
                     ],
                   ),
                 ],
@@ -91,7 +100,7 @@ class _PageViewImageState extends State<PageViewImage> {
                 },
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(

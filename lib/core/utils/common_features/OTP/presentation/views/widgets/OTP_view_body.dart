@@ -1,8 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/functions/awesome_dialouge.dart';
@@ -13,8 +13,6 @@ import 'package:shopy/core/widgets/custom_button.dart';
 import '../../../../../../../constants.dart';
 import '../../../../../../widgets/custom_app_bar.dart';
 import 'package:email_otp/email_otp.dart';
-
-import '../../../../../cubits/Auth_cubit/auth_cubit.dart';
 
 class OTPViewBody extends StatefulWidget {
   const OTPViewBody({super.key, required this.email});

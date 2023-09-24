@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/assetData.dart';
-import 'package:shopy/core/utils/cubits/auth_cubit/auth_cubit.dart';
 import 'package:shopy/core/utils/styles.dart';
 
 class SuccessViewBody extends StatefulWidget {
@@ -17,6 +16,7 @@ class _SuccessViewBodyState extends State<SuccessViewBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // ignore: prefer_const_constructors
     Future.delayed(Duration(seconds: 3), () {
       GoRouter.of(context)
           .pushReplacement(AppRouter.homeRoute, extra: widget.email);
