@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/core/widgets/custom_button.dart';
+import 'package:shopy/features/home/data/services/get_all_products_service.dart';
 import 'package:shopy/features/home/presentation/views/widgets/list_view_item.dart';
 import 'package:shopy/features/home/presentation/views/widgets/page_view_image.dart';
 import 'categories_row.dart';
 import 'clipped_rectangle.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetAllProducrService().getAllProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -22,7 +36,7 @@ class HomeViewBody extends StatelessWidget {
                 const ClippedRectangle(bottom: true),
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -30,7 +44,7 @@ class HomeViewBody extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'New products',
                             style: styles.textStyle18,
                           ),
