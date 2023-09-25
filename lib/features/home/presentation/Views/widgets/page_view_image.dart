@@ -1,15 +1,18 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shopy/core/utils/styles.dart';
 
 import '../../../../../constants.dart';
-import '../../../../../core/utils/assetData.dart';
+import '../../../data/product_model/product_model.dart';
 
 class PageViewImage extends StatefulWidget {
   const PageViewImage({
     super.key,
+    required this.products,
   });
-
+  final List<ProductModel> products;
   @override
   State<PageViewImage> createState() => _PageViewImageState();
 }
@@ -25,8 +28,10 @@ class _PageViewImageState extends State<PageViewImage> {
     Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (currentIndex < 2) {
         currentIndex++;
+        setState(() {});
       } else {
         currentIndex = 0;
+        setState(() {});
       }
       if (_controller.hasClients) {
         _controller.animateToPage(
@@ -72,26 +77,9 @@ class _PageViewImageState extends State<PageViewImage> {
               height: 100,
               child: PageView(
                 children: [
-                  Row(
-                    children: [
-                      Image.asset(AssetData.test),
-                      const Text('Air Max 2090'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Image.asset(
-                        AssetData.test,
-                      ),
-                      const Text('Air Max 2090'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Image.asset(AssetData.test),
-                      const Text('Air Max 2090'),
-                    ],
-                  ),
+                  ImageContainer(widget: widget, currentIndex: 0),
+                  ImageContainer(widget: widget, currentIndex: 1),
+                  ImageContainer(widget: widget, currentIndex: 2),
                 ],
                 controller: _controller,
                 onPageChanged: (value) {
@@ -121,6 +109,61 @@ class _PageViewImageState extends State<PageViewImage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ImageContainer extends StatelessWidget {
+  const ImageContainer({
+    super.key,
+    required this.widget,
+    required this.currentIndex,
+  });
+
+  final PageViewImage widget;
+  final int currentIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 30,
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(19),
+          child: Container(
+            width: 150,
+            height: 150,
+            decoration: BoxDecoration(
+                color: Colors.red, borderRadius: BorderRadius.circular(19)),
+            child: CachedNetworkImage(
+                imageUrl: widget.products[currentIndex].image!,
+                fit: BoxFit.fitWidth),
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Popular',
+              style: styles.textStyle12,
+            ),
+            Container(
+              width: 100,
+              child: Text(
+                widget.products[currentIndex].name!,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: styles.textStyle14,
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
