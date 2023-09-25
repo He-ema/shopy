@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shopy/core/utils/styles.dart';
 
 import '../../../../../constants.dart';
@@ -28,10 +29,8 @@ class _PageViewImageState extends State<PageViewImage> {
     Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (currentIndex < 2) {
         currentIndex++;
-        setState(() {});
       } else {
         currentIndex = 0;
-        setState(() {});
       }
       if (_controller.hasClients) {
         _controller.animateToPage(
@@ -135,10 +134,12 @@ class ImageContainer extends StatelessWidget {
           child: Container(
             width: 150,
             height: 150,
-            decoration: BoxDecoration(
-                color: Colors.red, borderRadius: BorderRadius.circular(19)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(19)),
             child: CachedNetworkImage(
                 imageUrl: widget.products[currentIndex].image!,
+                placeholder: (context, url) => SpinKitSpinningLines(
+                      color: kPrimaryColor,
+                    ),
                 fit: BoxFit.fitWidth),
           ),
         ),
@@ -157,6 +158,7 @@ class ImageContainer extends StatelessWidget {
               child: Text(
                 widget.products[currentIndex].name!,
                 maxLines: 2,
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: styles.textStyle14,
               ),

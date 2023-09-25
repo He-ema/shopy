@@ -1,13 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/core/widgets/custom_button.dart';
-import 'package:shopy/features/home/data/repos/home_repo_implementation.dart';
-import 'package:shopy/features/home/data/services/api_service.dart';
+
 import 'package:shopy/features/home/presentation/manager/get_products_cubit/get_products_cubit.dart';
 import 'package:shopy/features/home/presentation/views/widgets/list_view_item.dart';
 import 'package:shopy/features/home/presentation/views/widgets/page_view_image.dart';
+import 'package:shopy/features/home/presentation/views/widgets/shimmer_body.dart';
 import 'categories_row.dart';
 import 'clipped_rectangle.dart';
 
@@ -119,7 +118,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             child: Text(state.errorMessage),
           );
         } else {
-          return CircularProgressIndicator();
+          return const ShimmerViewBody();
         }
       },
     );

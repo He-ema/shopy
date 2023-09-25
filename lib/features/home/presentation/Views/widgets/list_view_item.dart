@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shopy/constants.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/features/home/data/product_model/product_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -30,6 +32,9 @@ class ListViewItem extends StatelessWidget {
               height: 150,
               child: CachedNetworkImage(
                 imageUrl: productModel.image!,
+                placeholder: (context, url) => SpinKitSpinningLines(
+                  color: kPrimaryColor,
+                ),
                 maxHeightDiskCache: 100,
                 fit: BoxFit.fitWidth,
               ),

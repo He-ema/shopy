@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shopy/features/home/presentation/views/widgets/shimmer_clipped_rectangle.dart';
 
-class WishListViewBody extends StatelessWidget {
-  const WishListViewBody({super.key});
+class ShimmerViewBody extends StatelessWidget {
+  const ShimmerViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
