@@ -26,9 +26,13 @@ class ListViewItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CachedNetworkImage(
-              imageUrl: productModel.image!,
-              fit: BoxFit.fitWidth,
+            Container(
+              height: 150,
+              child: CachedNetworkImage(
+                imageUrl: productModel.image!,
+                maxHeightDiskCache: 100,
+                fit: BoxFit.fitWidth,
+              ),
             ),
             // Image.asset(
             //   AssetData.test, fit: BoxFit.fitWidth,
