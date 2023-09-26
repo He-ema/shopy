@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopy/core/utils/styles.dart';
+import 'package:shopy/features/wish_list/presentaion/manager/wish_list_cubit/wish_list_cubit.dart';
 import 'package:shopy/features/wish_list/presentaion/views/widgets/wish_list_item.dart';
+import 'package:shopy/features/wish_list/presentaion/views/widgets/wish_list_other_body.dart';
 
-class WishListViewBody extends StatelessWidget {
+class WishListViewBody extends StatefulWidget {
   const WishListViewBody({super.key});
+
+  @override
+  State<WishListViewBody> createState() => _WishListViewBodyState();
+}
+
+class _WishListViewBodyState extends State<WishListViewBody> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<WishListCubit>(context).getWishListItems();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +41,7 @@ class WishListViewBody extends StatelessWidget {
           Divider(
             color: Colors.grey,
           ),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) => WishListItem(),
-            ),
-          )
+          WishListOtherBody(),
         ],
       ),
     );

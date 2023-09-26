@@ -3,9 +3,9 @@ import 'package:shopy/constants.dart';
 class WishListItemModel {
   final String name;
   final String image;
-  final String quantity;
+  final int quantity;
   final String id;
-  final double price;
+  final num price;
 
   WishListItemModel(
       {required this.name,
