@@ -22,7 +22,7 @@ class _WishListViewBodyState extends State<WishListViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 35),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
