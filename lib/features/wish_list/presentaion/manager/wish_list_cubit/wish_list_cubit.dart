@@ -18,7 +18,7 @@ class WishListCubit extends Cubit<WishListState> {
       CollectionReference favourites =
           FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
 
-      var listData = await favourites.get();
+      var listData = await favourites.orderBy(kId).get();
       List<WishListItemModel> items = [];
       for (var element in listData.docs) {
         items.add(WishListItemModel.fromJson(element));

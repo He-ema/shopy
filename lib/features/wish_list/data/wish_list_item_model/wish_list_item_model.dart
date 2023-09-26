@@ -4,7 +4,7 @@ class WishListItemModel {
   final String name;
   final String image;
   final int quantity;
-  final String id;
+  final int id;
   final num price;
 
   WishListItemModel(

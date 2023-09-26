@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:shopy/constants.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/features/wish_list/presentaion/manager/wish_list_cubit/wish_list_cubit.dart';
 import 'package:shopy/features/wish_list/presentaion/views/widgets/wish_list_item.dart';
@@ -22,27 +24,34 @@ class _WishListViewBodyState extends State<WishListViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 35),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: 50,
-          ),
-          Text(
-            'Wish List',
-            style: styles.textStyle26,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Divider(
-            color: Colors.grey,
-          ),
-          WishListOtherBody(),
-        ],
+    return LiquidPullToRefresh(
+      springAnimationDurationInMilliseconds: 750,
+      color: kPrimaryColor,
+      onRefresh: () async {
+        setState(() {});
+      },
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 35),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              'Wish List',
+              style: styles.textStyle26,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Divider(
+              color: Colors.grey,
+            ),
+            WishListOtherBody(),
+          ],
+        ),
       ),
     );
   }

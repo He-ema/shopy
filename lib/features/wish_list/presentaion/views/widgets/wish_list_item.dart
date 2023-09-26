@@ -70,13 +70,13 @@ class _WishListItemState extends State<WishListItem> {
                       onPressed: () async {
                         if (widget.wishListItemModel.quantity > 1) {
                           await favourites
-                              .doc(widget.wishListItemModel.id)
+                              .doc(widget.wishListItemModel.id.toString())
                               .update({
                             kQuantity: widget.wishListItemModel.quantity - 1,
                           });
                         } else {
                           await favourites
-                              .doc(widget.wishListItemModel.id)
+                              .doc(widget.wishListItemModel.id.toString())
                               .delete();
                         }
                         BlocProvider.of<WishListCubit>(context)
@@ -90,7 +90,7 @@ class _WishListItemState extends State<WishListItem> {
                         quantity++;
                         setState(() {});
                         await favourites
-                            .doc(widget.wishListItemModel.id)
+                            .doc(widget.wishListItemModel.id.toString())
                             .update({
                           kQuantity: widget.wishListItemModel.quantity + 1,
                         });

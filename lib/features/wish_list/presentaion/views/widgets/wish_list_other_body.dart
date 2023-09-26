@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shopy/constants.dart';
 import 'package:shopy/core/utils/styles.dart';
@@ -80,7 +81,7 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                                   duration: Duration(milliseconds: 300),
                                 );
                                 await favourites
-                                    .doc(state.items[index].id)
+                                    .doc(state.items[index].id.toString())
                                     .delete();
                               },
                               icon: Icons.delete,

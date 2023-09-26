@@ -140,7 +140,7 @@ class _ListViewItemState extends State<ListViewItem> {
                   kName: widget.productModel.name,
                   kQuantity: 1,
                   kPrice: widget.productModel.price,
-                  kId: widget.productModel.id.toString(),
+                  kId: widget.productModel.id,
                 });
                 isThere = true;
                 setState(() {});
