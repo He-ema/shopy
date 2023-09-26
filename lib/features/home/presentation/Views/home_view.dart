@@ -11,12 +11,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          GetProductsCubit(HomeRepoImplementation(ApiService(Dio()))),
-      child: const Scaffold(
-        body: HomeViewBody(),
-      ),
+    return const Scaffold(
+      body: HomeViewBody(),
     );
   }
 }

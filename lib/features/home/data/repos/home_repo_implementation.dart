@@ -19,7 +19,6 @@ class HomeRepoImplementation implements HomeRepo {
       for (var element in data) {
         products.add(ProductModel.fromJson(element));
       }
-
       return right(products);
     } catch (e) {
       if (e is DioException) {

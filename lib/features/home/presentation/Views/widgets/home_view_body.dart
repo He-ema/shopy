@@ -22,7 +22,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<GetProductsCubit>(context).getAllProduct();
   }
 
   @override

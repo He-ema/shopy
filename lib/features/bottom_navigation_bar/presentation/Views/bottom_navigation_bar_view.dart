@@ -18,8 +18,8 @@ class BottomNavigationBarView extends StatefulWidget {
 class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
   final List<Widget> views = const [
     HomeView(),
-    CartView(),
     WishListView(),
+    CartView(),
     ProfileView(),
   ];
 
