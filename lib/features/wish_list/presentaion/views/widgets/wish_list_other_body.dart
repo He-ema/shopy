@@ -10,11 +10,17 @@ import 'package:shopy/features/wish_list/presentaion/manager/wish_list_cubit/wis
 import 'package:shopy/features/wish_list/presentaion/views/widgets/shimmer_wish_list_body.dart';
 import 'package:shopy/features/wish_list/presentaion/views/widgets/wish_list_item.dart';
 
-class WishListOtherBody extends StatelessWidget {
+class WishListOtherBody extends StatefulWidget {
   const WishListOtherBody({
     super.key,
   });
 
+  @override
+  State<WishListOtherBody> createState() => _WishListOtherBodyState();
+}
+
+class _WishListOtherBodyState extends State<WishListOtherBody> {
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WishListCubit, WishListState>(
@@ -29,21 +35,53 @@ class WishListOtherBody extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
+                    child: AnimatedList(
+                      key: _listKey,
                       padding: EdgeInsets.zero,
-                      itemCount: state.items.length,
-                      itemBuilder: (context, index) => Padding(
+                      initialItemCount: state.items.length,
+                      itemBuilder: (context, index, animation) => Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Slidable(
                           startActionPane:
                               ActionPane(motion: BehindMotion(), children: [
                             SlidableAction(
                               label: 'Delete',
-                              onPressed: (context) {
+                              onPressed: (context) async {
                                 CollectionReference favourites =
                                     FirebaseFirestore.instance.collection(
                                         kFavouriteCollectionReference);
-                                favourites.doc(state.items[index].id).delete();
+
+                                _listKey.currentState!.removeItem(
+                                  index,
+                                  (_, animation) {
+                                    return SizeTransition(
+                                      sizeFactor: animation,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(14),
+                                        child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.75,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red.withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(14),
+                                          ),
+                                          child: Center(child: Text('Deleted')),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  duration: Duration(milliseconds: 300),
+                                );
+                                await favourites
+                                    .doc(state.items[index].id)
+                                    .delete();
                               },
                               icon: Icons.delete,
                               backgroundColor: Colors.red,

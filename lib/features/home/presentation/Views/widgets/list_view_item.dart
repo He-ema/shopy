@@ -25,7 +25,19 @@ class _ListViewItemState extends State<ListViewItem> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    exist(id: widget.productModel.id.toString());
+    if (this.mounted) {
+      check();
+    }
+  }
+
+  void check() async {
+    isThere = await exist(id: widget.productModel.id.toString());
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -149,13 +161,16 @@ class _ListViewItemState extends State<ListViewItem> {
   }
 
   Future<bool> exist({required String id}) async {
+    bool docExist = false;
     var doc = favourites.doc(id);
     await doc.get().then((doc) {
       if (doc.exists) {
-        isThere = true;
-        setState(() {});
+        docExist = true;
+        if (this.mounted) {
+          setState(() {});
+        }
       }
     });
-    return isThere;
+    return docExist;
   }
 }

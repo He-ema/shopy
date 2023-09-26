@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/features/wish_list/data/wish_list_item_model/wish_list_item_model.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/utils/assetData.dart';
+import '../../manager/wish_list_cubit/wish_list_cubit.dart';
 
 class WishListItem extends StatefulWidget {
   const WishListItem({
@@ -22,9 +24,9 @@ class WishListItem extends StatefulWidget {
 class _WishListItemState extends State<WishListItem> {
   final CollectionReference favourites =
       FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
-
   @override
   Widget build(BuildContext context) {
+    int quantity = widget.wishListItemModel.quantity;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
@@ -59,7 +61,7 @@ class _WishListItemState extends State<WishListItem> {
                 ),
               ),
               Text(
-                '\$' + widget.wishListItemModel.price.toString(),
+                '\$${widget.wishListItemModel.price}',
                 style: styles.textStyle14.copyWith(fontWeight: FontWeight.bold),
               ),
               Row(
@@ -77,18 +79,21 @@ class _WishListItemState extends State<WishListItem> {
                               .doc(widget.wishListItemModel.id)
                               .delete();
                         }
+                        BlocProvider.of<WishListCubit>(context)
+                            .getWishListItems();
                         setState(() {});
                       },
                       icon: Icon(Icons.remove)),
-                  Text(widget.wishListItemModel.quantity.toString()),
+                  Text('$quantity'),
                   IconButton(
                       onPressed: () async {
+                        quantity++;
+                        setState(() {});
                         await favourites
                             .doc(widget.wishListItemModel.id)
                             .update({
                           kQuantity: widget.wishListItemModel.quantity + 1,
                         });
-                        setState(() {});
                       },
                       icon: Icon(Icons.add))
                 ],
