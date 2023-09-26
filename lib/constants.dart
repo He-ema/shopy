@@ -4,6 +4,7 @@ const kPrimaryColor = Color(0xff1152FD);
 const kUsersCollectionReference = 'users';
 const kFavouriteCollectionReference = 'favourites';
 const kName = 'name';
+const kId = 'id';
 const kEmail = 'email';
 const kImage = 'image';
 const kQuantity = 'quantity';
