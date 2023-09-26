@@ -1,17 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/features/wish_list/data/wish_list_item_model/wish_list_item_model.dart';
 
+import '../../../../../constants.dart';
 import '../../../../../core/utils/assetData.dart';
 
-class WishListItem extends StatelessWidget {
+class WishListItem extends StatefulWidget {
   const WishListItem({
     super.key,
     required this.wishListItemModel,
   });
   final WishListItemModel wishListItemModel;
+
+  @override
+  State<WishListItem> createState() => _WishListItemState();
+}
+
+class _WishListItemState extends State<WishListItem> {
+  final CollectionReference favourites =
+      FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +40,7 @@ class WishListItem extends StatelessWidget {
                 width: 120,
                 height: 120,
                 child: CachedNetworkImage(
-                  imageUrl: wishListItemModel.image,
+                  imageUrl: widget.wishListItemModel.image,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -41,21 +52,45 @@ class WishListItem extends StatelessWidget {
               Container(
                 width: 100,
                 child: Text(
-                  wishListItemModel.name,
+                  widget.wishListItemModel.name,
                   style: styles.textStyle14,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               Text(
-                '\$' + wishListItemModel.price.toString(),
+                '\$' + widget.wishListItemModel.price.toString(),
                 style: styles.textStyle14.copyWith(fontWeight: FontWeight.bold),
               ),
               Row(
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.remove)),
-                  Text(wishListItemModel.quantity.toString()),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.add))
+                  IconButton(
+                      onPressed: () async {
+                        if (widget.wishListItemModel.quantity > 1) {
+                          await favourites
+                              .doc(widget.wishListItemModel.id)
+                              .update({
+                            kQuantity: widget.wishListItemModel.quantity - 1,
+                          });
+                        } else {
+                          await favourites
+                              .doc(widget.wishListItemModel.id)
+                              .delete();
+                        }
+                        setState(() {});
+                      },
+                      icon: Icon(Icons.remove)),
+                  Text(widget.wishListItemModel.quantity.toString()),
+                  IconButton(
+                      onPressed: () async {
+                        await favourites
+                            .doc(widget.wishListItemModel.id)
+                            .update({
+                          kQuantity: widget.wishListItemModel.quantity + 1,
+                        });
+                        setState(() {});
+                      },
+                      icon: Icon(Icons.add))
                 ],
               )
             ],
