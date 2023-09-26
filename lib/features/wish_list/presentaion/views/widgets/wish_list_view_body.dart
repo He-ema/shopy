@@ -24,34 +24,27 @@ class _WishListViewBodyState extends State<WishListViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return LiquidPullToRefresh(
-      springAnimationDurationInMilliseconds: 750,
-      color: kPrimaryColor,
-      onRefresh: () async {
-        setState(() {});
-      },
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              'Wish List',
-              style: styles.textStyle26,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            WishListOtherBody(),
-          ],
-        ),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 35),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 50,
+          ),
+          Text(
+            'Wish List',
+            style: styles.textStyle26,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Divider(
+            color: Colors.grey,
+          ),
+          WishListOtherBody(),
+        ],
       ),
     );
   }

@@ -14,8 +14,10 @@ class WishListItem extends StatefulWidget {
   const WishListItem({
     super.key,
     required this.wishListItemModel,
+    required this.deleteItem,
   });
   final WishListItemModel wishListItemModel;
+  final VoidCallback deleteItem;
 
   @override
   State<WishListItem> createState() => _WishListItemState();
@@ -26,7 +28,6 @@ class _WishListItemState extends State<WishListItem> {
       FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
   @override
   Widget build(BuildContext context) {
-    int quantity = widget.wishListItemModel.quantity;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
@@ -68,31 +69,28 @@ class _WishListItemState extends State<WishListItem> {
                 children: [
                   IconButton(
                       onPressed: () async {
-                        if (widget.wishListItemModel.quantity > 1) {
-                          await favourites
-                              .doc(widget.wishListItemModel.id.toString())
-                              .update({
-                            kQuantity: widget.wishListItemModel.quantity - 1,
-                          });
-                        } else {
-                          await favourites
-                              .doc(widget.wishListItemModel.id.toString())
-                              .delete();
-                        }
-                        BlocProvider.of<WishListCubit>(context)
-                            .getWishListItems();
-                        setState(() {});
-                      },
-                      icon: Icon(Icons.remove)),
-                  Text('$quantity'),
-                  IconButton(
-                      onPressed: () async {
-                        quantity++;
+                        widget.wishListItemModel.quantity--;
                         setState(() {});
                         await favourites
                             .doc(widget.wishListItemModel.id.toString())
                             .update({
-                          kQuantity: widget.wishListItemModel.quantity + 1,
+                          kQuantity: widget.wishListItemModel.quantity,
+                        });
+
+                        if (widget.wishListItemModel.quantity == 0) {
+                          widget.deleteItem();
+                        }
+                      },
+                      icon: Icon(Icons.remove)),
+                  Text(widget.wishListItemModel.quantity.toString()),
+                  IconButton(
+                      onPressed: () async {
+                        widget.wishListItemModel.quantity++;
+                        setState(() {});
+                        await favourites
+                            .doc(widget.wishListItemModel.id.toString())
+                            .update({
+                          kQuantity: widget.wishListItemModel.quantity,
                         });
                       },
                       icon: Icon(Icons.add))

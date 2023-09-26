@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shopy/constants.dart';
 import 'package:shopy/core/utils/styles.dart';
@@ -40,60 +39,33 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                       key: _listKey,
                       padding: EdgeInsets.zero,
                       initialItemCount: state.items.length,
-                      itemBuilder: (context, index, animation) => Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Slidable(
-                          startActionPane:
-                              ActionPane(motion: BehindMotion(), children: [
-                            SlidableAction(
-                              label: 'Delete',
-                              onPressed: (context) async {
-                                CollectionReference favourites =
-                                    FirebaseFirestore.instance.collection(
-                                        kFavouriteCollectionReference);
+                      itemBuilder: (context, index, animation) {
+                        void callDelete() async {
+                          await deleteListItem(index, context, state);
+                        }
 
-                                _listKey.currentState!.removeItem(
-                                  index,
-                                  (_, animation) {
-                                    return SizeTransition(
-                                      sizeFactor: animation,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(14),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.75,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.15,
-                                          decoration: BoxDecoration(
-                                            color: Colors.red.withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(14),
-                                          ),
-                                          child: Center(child: Text('Deleted')),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  duration: Duration(milliseconds: 300),
-                                );
-                                await favourites
-                                    .doc(state.items[index].id.toString())
-                                    .delete();
-                              },
-                              icon: Icons.delete,
-                              backgroundColor: Colors.red,
-                              borderRadius: BorderRadius.circular(14),
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Slidable(
+                            startActionPane:
+                                ActionPane(motion: BehindMotion(), children: [
+                              SlidableAction(
+                                label: 'Delete',
+                                onPressed: (context) async {
+                                  await deleteListItem(index, context, state);
+                                },
+                                icon: Icons.delete,
+                                backgroundColor: Colors.red,
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ]),
+                            child: WishListItem(
+                              deleteItem: callDelete,
+                              wishListItemModel: state.items[index],
                             ),
-                          ]),
-                          child: WishListItem(
-                            wishListItemModel: state.items[index],
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                   CustomButton(
@@ -126,5 +98,36 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
         }
       },
     );
+  }
+
+  Future<void> deleteListItem(
+      int index, BuildContext context, WishListSuccess state) async {
+    {
+      CollectionReference favourites =
+          FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
+
+      _listKey.currentState!.removeItem(
+        index,
+        (_, animation) {
+          return SizeTransition(
+            sizeFactor: animation,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.75,
+                height: MediaQuery.of(context).size.height * 0.15,
+                decoration: BoxDecoration(
+                  color: Colors.red.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Center(child: Text('Deleted')),
+              ),
+            ),
+          );
+        },
+        duration: Duration(milliseconds: 300),
+      );
+      await favourites.doc(state.items[index].id.toString()).delete();
+    }
   }
 }
