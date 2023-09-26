@@ -30,9 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          GetProductsCubit(HomeRepoImplementation(ApiService(Dio())))
-            ..getAllProduct(),
+      create: (context) => GetProductsCubit(
+        HomeRepoImplementation(
+          ApiService(
+            Dio(),
+          ),
+        ),
+      )..getAllProduct(),
       child: MaterialApp.router(
         theme:
             ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.white),
