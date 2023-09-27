@@ -12,9 +12,9 @@ final class CartInitial extends CartState {}
 final class CartLoading extends CartState {}
 
 final class CartSuccess extends CartState {
-  final List<WishListItemModel> products;
+  final List<WishListItemModel> items;
 
-  const CartSuccess(this.products);
+  const CartSuccess(this.items);
 }
 
 final class CartFailure extends CartState {
