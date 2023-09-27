@@ -59,9 +59,18 @@ class ShimmerViewBody extends StatelessWidget {
               ),
             ),
             Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Skelton(width: 150, height: 250, opacity: 0.2),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Skelton(width: 150, height: 250, opacity: 0.2),
+                ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Skelton(width: 150, height: 250, opacity: 0.2),
+                ),
+              ],
             ),
           ],
         )
