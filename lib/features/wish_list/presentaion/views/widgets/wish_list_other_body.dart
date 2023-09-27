@@ -86,12 +86,15 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                         });
                       }
                       removeAllFromList();
-                      widget.isLoading();
+                      // widget.isLoading();
                       for (int i = 0; i < state.items.length; i++) {
                         favourites.doc(state.items[i].id.toString()).delete();
                       }
-                      widget.isLoading();
-                      setState(() {});
+                      // widget.isLoading();
+                      Future.delayed(Duration(seconds: 2), () {
+                        BlocProvider.of<WishListCubit>(context)
+                            .getWishListItems();
+                      });
                     },
                   ),
                 ],
