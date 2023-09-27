@@ -1,14 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/features/wish_list/data/wish_list_item_model/wish_list_item_model.dart';
 
 import '../../../../../constants.dart';
-import '../../../../../core/utils/assetData.dart';
-import '../../manager/wish_list_cubit/wish_list_cubit.dart';
 
 class WishListItem extends StatefulWidget {
   const WishListItem({

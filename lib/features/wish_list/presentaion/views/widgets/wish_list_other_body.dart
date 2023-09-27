@@ -13,14 +13,17 @@ import 'package:shopy/features/wish_list/presentaion/views/widgets/wish_list_ite
 class WishListOtherBody extends StatefulWidget {
   const WishListOtherBody({
     super.key,
+    required this.isLoading,
   });
-
+  final VoidCallback isLoading;
   @override
   State<WishListOtherBody> createState() => _WishListOtherBodyState();
 }
 
 class _WishListOtherBodyState extends State<WishListOtherBody> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
+  CollectionReference favourites =
+      FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WishListCubit, WishListState>(
@@ -70,7 +73,26 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                   ),
                   CustomButton(
                     text: 'Add to cart',
-                    onPressed: () {},
+                    onPressed: () async {
+                      for (int i = 0; i < state.items.length; i++) {
+                        CollectionReference cart = FirebaseFirestore.instance
+                            .collection(kCartCollectionReference);
+                        await cart.doc(state.items[i].id.toString()).set({
+                          kId: state.items[i].id,
+                          kImage: state.items[i].image,
+                          kName: state.items[i].name,
+                          kPrice: state.items[i].price,
+                          kQuantity: state.items[i].quantity,
+                        });
+                      }
+                      removeAllFromList();
+                      widget.isLoading();
+                      for (int i = 0; i < state.items.length; i++) {
+                        favourites.doc(state.items[i].id.toString()).delete();
+                      }
+                      widget.isLoading();
+                      setState(() {});
+                    },
                   ),
                 ],
               ),
@@ -100,17 +122,47 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
     );
   }
 
+  void removeAllFromList() {
+    _listKey.currentState!.removeAllItems(
+      (context, animation) {
+        return SlideTransition(
+          position: animation.drive(
+              Tween(begin: Offset(2, 0.0), end: Offset(0.0, 0.0))
+                  .chain(CurveTween(curve: Curves.elasticInOut))),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: MediaQuery.of(context).size.height * 0.15,
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Center(
+                  child: Text(
+                'Added to cart',
+                style: styles.textStyle16.copyWith(color: Colors.white),
+              )),
+            ),
+          ),
+        );
+      },
+      duration: Duration(milliseconds: 2000),
+    );
+  }
+
   Future<void> deleteListItem(
       int index, BuildContext context, WishListSuccess state) async {
     {
-      CollectionReference favourites =
-          FirebaseFirestore.instance.collection(kFavouriteCollectionReference);
-
       _listKey.currentState!.removeItem(
         index,
         (_, animation) {
-          return SizeTransition(
-            sizeFactor: animation,
+          return SlideTransition(
+            position: animation.drive(
+                Tween(begin: Offset(2, 0.0), end: Offset(0.0, 0.0))
+                    .chain(CurveTween(curve: Curves.elasticInOut))),
+            // sizeFactor: animation,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
@@ -125,7 +177,7 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
             ),
           );
         },
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 2000),
       );
       await favourites.doc(state.items[index].id.toString()).delete();
     }
