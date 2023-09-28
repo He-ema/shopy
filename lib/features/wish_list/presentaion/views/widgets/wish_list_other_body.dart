@@ -169,6 +169,7 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
+                margin: EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: MediaQuery.of(context).size.height * 0.15,
                 decoration: BoxDecoration(
