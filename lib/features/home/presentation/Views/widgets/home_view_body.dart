@@ -12,7 +12,6 @@ import 'clipped_rectangle.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
-
   @override
   State<HomeViewBody> createState() => _HomeViewBodyState();
 }

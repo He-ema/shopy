@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopy/core/utils/assetData.dart';
 import 'package:shopy/core/utils/styles.dart';
+import 'package:shopy/features/profile/presentation/manager/cubit/profile_cubit.dart';
+import 'package:shopy/features/profile/presentation/views/widgets/profile_shimmer.dart';
+import 'package:shopy/features/profile/presentation/views/widgets/success_body.dart';
 
 class ProfileViewBody extends StatefulWidget {
-  const ProfileViewBody({super.key});
-
+  const ProfileViewBody({super.key, required this.email});
+  final String email;
   @override
   State<ProfileViewBody> createState() => _ProfileViewBodyState();
 }
@@ -14,164 +18,23 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    BlocProvider.of<ProfileCubit>(context).getUserData(widget.email);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          const Text(
-            'Profile',
-            style: styles.textStyle26,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Divider(
-            color: Colors.grey,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(14),
-                            child: Image.asset(AssetData.test)),
-                        Spacer(),
-                        Column(
-                          children: [
-                            Text(
-                              'Hampksha',
-                              style: styles.textStyle18,
-                            ),
-                            MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(7)),
-                              color: Colors.grey,
-                              onPressed: () {},
-                              child: Text('Edit Profile'),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 1,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Account Details',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Card & offers',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Notifications',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Delivery information',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Payment information',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Language',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Privacy settings',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(thickness: 1),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Logout',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileSuccess) {
+          return SuccessBody(user: state.user);
+        } else if (state is ProfileFailure) {
+          return Center(
+            child: Text(state.errorMessage),
+          );
+        } else {
+          return const ProfileShimmer();
+        }
+      },
     );
   }
 }

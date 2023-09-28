@@ -16,14 +16,20 @@ class BottomNavigationBarView extends StatefulWidget {
 }
 
 class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
-  final List<Widget> views = const [
-    HomeView(),
-    WishListView(),
-    CartView(),
-    ProfileView(),
-  ];
+  late List<Widget> views;
 
   int currentIndex = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    views = [
+      const HomeView(),
+      const WishListView(),
+      const CartView(),
+      ProfileView(email: widget.email),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
