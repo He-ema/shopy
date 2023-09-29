@@ -35,7 +35,6 @@ class _CartOtherBodyState extends State<CartOtherBody> {
           );
         } else if (state is CartSuccess) {
           if (state.items.length != 0) {
-            double total = 0;
             return Expanded(
               child: Column(
                 children: [
@@ -48,9 +47,6 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                         void callDelete() async {
                           await deleteListItem(index, context, state);
                         }
-
-                        total += state.items[index].price;
-                        print(total);
 
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
@@ -88,7 +84,7 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                           style: styles.textStyle16,
                         ),
                         Text(
-                          '\$' '$total',
+                          '\$' '${state.total}',
                           style: styles.textStyle16,
                         ),
                       ],
@@ -98,7 +94,7 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                     text: 'Checkout',
                     onPressed: () async {
                       if (await PaymentManager.makePayment(
-                          total.toInt(), 'USD')) {
+                          state.total.toInt(), 'USD')) {
                         removeAllFromList();
                         await Future.delayed(Duration(seconds: 2));
                         for (int i = 0; i < state.items.length; i++) {

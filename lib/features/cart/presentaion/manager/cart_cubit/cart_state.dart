@@ -13,8 +13,8 @@ final class CartLoading extends CartState {}
 
 final class CartSuccess extends CartState {
   final List<WishListItemModel> items;
-
-  const CartSuccess(this.items);
+  final double total;
+  const CartSuccess(this.items, this.total);
 }
 
 final class CartFailure extends CartState {

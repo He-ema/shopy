@@ -20,10 +20,14 @@ class CartCubit extends Cubit<CartState> {
 
       var listData = await favourites.orderBy(kId).get();
       List<WishListItemModel> items = [];
+      double total = 0;
       for (var element in listData.docs) {
+        List<WishListItemModel> temp = [];
         items.add(WishListItemModel.fromJson(element));
+        temp.add(WishListItemModel.fromJson(element));
+        total += temp[0].price;
       }
-      emit(CartSuccess(items));
+      emit(CartSuccess(items, total));
     } catch (e) {
       emit(CartFailure(e.toString()));
     }
