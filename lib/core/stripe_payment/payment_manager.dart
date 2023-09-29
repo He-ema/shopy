@@ -3,7 +3,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:shopy/core/stripe_payment/stripe_keys.dart';
 
 abstract class PaymentManager {
-  static Future<void> makePayment(int amount, String currency) async {
+  static Future<bool> makePayment(int amount, String currency) async {
     try {
       String clientSecret =
           await _getClientSecret((amount * 100).toString(), currency);
@@ -11,8 +11,9 @@ abstract class PaymentManager {
       await initializePaymentSheet(clientSecret);
 
       await Stripe.instance.presentPaymentSheet();
+      return true;
     } catch (e) {
-      throw Exception(e.toString());
+      return false;
     }
   }
 
@@ -41,4 +42,16 @@ abstract class PaymentManager {
       merchantDisplayName: 'Hema',
     ));
   }
+
+  // static Future<bool> successfullyPaid(String clientSecret) async {
+  //   var paymentIntent =
+  //       await Stripe.instance.retrievePaymentIntent(clientSecret);
+  //   if (paymentIntent.status == 'succeeded') {
+  //     print('yes');
+  //     return true;
+  //   } else {
+  //     print('no');
+  //     return false;
+  //   }
+  // }
 }

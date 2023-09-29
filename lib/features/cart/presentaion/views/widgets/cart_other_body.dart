@@ -35,6 +35,7 @@ class _CartOtherBodyState extends State<CartOtherBody> {
           );
         } else if (state is CartSuccess) {
           if (state.items.length != 0) {
+            double total = 0;
             return Expanded(
               child: Column(
                 children: [
@@ -47,6 +48,9 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                         void callDelete() async {
                           await deleteListItem(index, context, state);
                         }
+
+                        total += state.items[index].price;
+                        print(total);
 
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
@@ -74,10 +78,34 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                       },
                     ),
                   ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'In Total',
+                          style: styles.textStyle16,
+                        ),
+                        Text(
+                          '\$' '$total',
+                          style: styles.textStyle16,
+                        ),
+                      ],
+                    ),
+                  ),
                   CustomButton(
                     text: 'Checkout',
                     onPressed: () async {
-                      await PaymentManager.makePayment(20, 'USD');
+                      if (await PaymentManager.makePayment(
+                          total.toInt(), 'USD')) {
+                        removeAllFromList();
+                        await Future.delayed(Duration(seconds: 2));
+                        for (int i = 0; i < state.items.length; i++) {
+                          Cart.doc(state.items[i].id.toString()).delete();
+                        }
+                        BlocProvider.of<CartCubit>(context).getCartItems();
+                      }
                     },
                   ),
                 ],
@@ -138,5 +166,35 @@ class _CartOtherBodyState extends State<CartOtherBody> {
       );
       await Cart.doc(state.items[index].id.toString()).delete();
     }
+  }
+
+  void removeAllFromList() {
+    _listKey.currentState!.removeAllItems(
+      (context, animation) {
+        return SlideTransition(
+          position: animation.drive(
+              Tween(begin: Offset(2, 0.0), end: Offset(0.0, 0.0))
+                  .chain(CurveTween(curve: Curves.elasticInOut))),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: MediaQuery.of(context).size.height * 0.15,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Center(
+                  child: Text(
+                'Succeeded',
+                style: styles.textStyle16.copyWith(color: Colors.white),
+              )),
+            ),
+          ),
+        );
+      },
+      duration: Duration(milliseconds: 2000),
+    );
   }
 }

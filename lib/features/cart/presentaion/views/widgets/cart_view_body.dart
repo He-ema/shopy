@@ -47,7 +47,7 @@ class _CartViewBodyState extends State<CartViewBody> {
               height: 50,
             ),
             const Text(
-              'Wish List',
+              'Cart',
               style: styles.textStyle26,
               textAlign: TextAlign.center,
             ),
