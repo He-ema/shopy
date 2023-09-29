@@ -61,6 +61,7 @@ class _ListViewItemState extends State<ListViewItem> {
                   height: 150,
                   child: CachedNetworkImage(
                     imageUrl: widget.productModel.image!,
+                    // ignore: prefer_const_constructors
                     placeholder: (context, url) => SpinKitSpinningLines(
                       color: kPrimaryColor,
                     ),

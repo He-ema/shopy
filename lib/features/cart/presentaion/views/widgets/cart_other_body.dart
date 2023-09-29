@@ -75,11 +75,12 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'In Total',
                           style: styles.textStyle16,
                         ),
@@ -96,7 +97,7 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                       if (await PaymentManager.makePayment(
                           state.total.toInt(), 'USD')) {
                         removeAllFromList();
-                        await Future.delayed(Duration(seconds: 2));
+                        await Future.delayed(const Duration(seconds: 2));
                         for (int i = 0; i < state.items.length; i++) {
                           Cart.doc(state.items[i].id.toString()).delete();
                         }
@@ -146,7 +147,7 @@ class _CartOtherBodyState extends State<CartOtherBody> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: MediaQuery.of(context).size.height * 0.15,
                 decoration: BoxDecoration(
@@ -169,12 +170,12 @@ class _CartOtherBodyState extends State<CartOtherBody> {
       (context, animation) {
         return SlideTransition(
           position: animation.drive(
-              Tween(begin: Offset(2, 0.0), end: Offset(0.0, 0.0))
+              Tween(begin: const Offset(2, 0.0), end: const Offset(0.0, 0.0))
                   .chain(CurveTween(curve: Curves.elasticInOut))),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: Container(
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               width: MediaQuery.of(context).size.width * 0.75,
               height: MediaQuery.of(context).size.height * 0.15,
               decoration: BoxDecoration(
@@ -190,7 +191,7 @@ class _CartOtherBodyState extends State<CartOtherBody> {
           ),
         );
       },
-      duration: Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 2000),
     );
   }
 }

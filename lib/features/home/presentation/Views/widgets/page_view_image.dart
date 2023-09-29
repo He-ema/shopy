@@ -126,7 +126,7 @@ class ImageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 30,
         ),
         ClipRRect(
@@ -137,13 +137,13 @@ class ImageContainer extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(19)),
             child: CachedNetworkImage(
                 imageUrl: widget.products[currentIndex].image!,
-                placeholder: (context, url) => SpinKitSpinningLines(
+                placeholder: (context, url) => const SpinKitSpinningLines(
                       color: kPrimaryColor,
                     ),
                 fit: BoxFit.fitWidth),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Column(

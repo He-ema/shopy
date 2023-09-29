@@ -42,7 +42,7 @@ class ProfileShimmer extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.01,
                         opacity: 0.5,
                         borderRaduis: 12),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Skelton(
@@ -54,8 +54,8 @@ class ProfileShimmer extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 20,
             ),
             Skelton(
@@ -63,23 +63,11 @@ class ProfileShimmer extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.01,
                 opacity: 0.5,
                 borderRaduis: 12),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(),
-            SizedBox(
-              height: 20,
-            ),
-            Skelton(
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: MediaQuery.of(context).size.height * 0.01,
-                opacity: 0.5,
-                borderRaduis: 12),
-            SizedBox(
-              height: 20,
-            ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 20,
             ),
             Skelton(
@@ -87,23 +75,11 @@ class ProfileShimmer extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.01,
                 opacity: 0.5,
                 borderRaduis: 12),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(),
-            SizedBox(
-              height: 20,
-            ),
-            Skelton(
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: MediaQuery.of(context).size.height * 0.01,
-                opacity: 0.5,
-                borderRaduis: 12),
-            SizedBox(
-              height: 20,
-            ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 20,
             ),
             Skelton(
@@ -111,23 +87,11 @@ class ProfileShimmer extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.01,
                 opacity: 0.5,
                 borderRaduis: 12),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(),
-            SizedBox(
-              height: 20,
-            ),
-            Skelton(
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: MediaQuery.of(context).size.height * 0.01,
-                opacity: 0.5,
-                borderRaduis: 12),
-            SizedBox(
-              height: 20,
-            ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 20,
             ),
             Skelton(
@@ -135,11 +99,11 @@ class ProfileShimmer extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.01,
                 opacity: 0.5,
                 borderRaduis: 12),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+            const SizedBox(
               height: 20,
             ),
             Skelton(
@@ -147,7 +111,43 @@ class ProfileShimmer extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.01,
                 opacity: 0.5,
                 borderRaduis: 12),
-            SizedBox(
+            const SizedBox(
+              height: 20,
+            ),
+            const Divider(),
+            const SizedBox(
+              height: 20,
+            ),
+            Skelton(
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.height * 0.01,
+                opacity: 0.5,
+                borderRaduis: 12),
+            const SizedBox(
+              height: 20,
+            ),
+            const Divider(),
+            const SizedBox(
+              height: 20,
+            ),
+            Skelton(
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.height * 0.01,
+                opacity: 0.5,
+                borderRaduis: 12),
+            const SizedBox(
+              height: 20,
+            ),
+            const Divider(),
+            const SizedBox(
+              height: 20,
+            ),
+            Skelton(
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.height * 0.01,
+                opacity: 0.5,
+                borderRaduis: 12),
+            const SizedBox(
               height: 20,
             ),
           ],

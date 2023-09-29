@@ -12,7 +12,7 @@ class ShimmerViewBody extends StatelessWidget {
         Shimmer.fromColors(
           baseColor: Colors.grey.withOpacity(0.5),
           highlightColor: Colors.white,
-          child: ShimmerClippedRectangle(),
+          child: const ShimmerClippedRectangle(),
         ),
         Positioned(
           bottom: 0,
@@ -21,29 +21,29 @@ class ShimmerViewBody extends StatelessWidget {
           child: Shimmer.fromColors(
             baseColor: Colors.grey.withOpacity(0.5),
             highlightColor: Colors.white,
-            child: ShimmerClippedRectangle(bottom: true),
+            child: const ShimmerClippedRectangle(bottom: true),
           ),
         ),
         Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Skelton(width: 200, height: 40, opacity: 0.2),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 Skelton(width: 40, height: 40, opacity: 0.2),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Skelton(width: 250, height: 150, opacity: 0.2),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
@@ -58,14 +58,14 @@ class ShimmerViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10, left: 20),
                   child: Skelton(width: 150, height: 250, opacity: 0.2),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10, right: 20),
                   child: Skelton(width: 150, height: 250, opacity: 0.2),

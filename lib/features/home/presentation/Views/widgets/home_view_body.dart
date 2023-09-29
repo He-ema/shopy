@@ -73,7 +73,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                               scrollDirection: Axis.horizontal,
                               itemCount: state.products.length,
                               itemBuilder: (context, index) => Padding(
-                                padding: EdgeInsets.only(left: 10),
+                                padding: const EdgeInsets.only(left: 10),
                                 child: ListViewItem(
                                     productModel: state.products[index]),
                               ),
@@ -85,14 +85,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   )),
               Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 35),
                     child: SearchAndCamera(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   PageViewImage(products: [
@@ -100,11 +100,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     state.products[1],
                     state.products[2],
                   ]),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  CategoriesRow(),
-                  SizedBox(
+                  const CategoriesRow(),
+                  const SizedBox(
                     height: 50,
                   ),
                 ],

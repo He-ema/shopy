@@ -36,7 +36,7 @@ class _WishListItemState extends State<WishListItem> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 width: 120,
                 height: 120,
                 child: CachedNetworkImage(
@@ -46,7 +46,7 @@ class _WishListItemState extends State<WishListItem> {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Column(
             children: [
               Container(
@@ -78,7 +78,7 @@ class _WishListItemState extends State<WishListItem> {
                           widget.deleteItem();
                         }
                       },
-                      icon: Icon(Icons.remove)),
+                      icon: const Icon(Icons.remove)),
                   Text(widget.wishListItemModel.quantity.toString()),
                   IconButton(
                       onPressed: () async {
@@ -90,12 +90,12 @@ class _WishListItemState extends State<WishListItem> {
                           kQuantity: widget.wishListItemModel.quantity,
                         });
                       },
-                      icon: Icon(Icons.add))
+                      icon: const Icon(Icons.add))
                 ],
               )
             ],
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );

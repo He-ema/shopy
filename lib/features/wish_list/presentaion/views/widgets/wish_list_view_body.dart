@@ -40,22 +40,22 @@ class _WishListViewBodyState extends State<WishListViewBody> {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35),
+        padding: const EdgeInsets.symmetric(horizontal: 35),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Text(
+            const Text(
               'Wish List',
               style: styles.textStyle26,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
             ),
             WishListOtherBody(isLoading: changeLoading),

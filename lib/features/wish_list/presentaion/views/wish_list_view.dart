@@ -10,7 +10,7 @@ class WishListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => WishListCubit(),
-      child: Scaffold(
+      child: const Scaffold(
         body: WishListViewBody(),
       ),
     );

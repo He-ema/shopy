@@ -45,7 +45,8 @@ class SuccessBody extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(14),
                           child: CachedNetworkImage(
-                            placeholder: (context, url) => SpinKitSpinningLines(
+                            placeholder: (context, url) =>
+                                const SpinKitSpinningLines(
                               color: kPrimaryColor,
                             ),
                             imageUrl: user.image,
@@ -53,7 +54,7 @@ class SuccessBody extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Column(
                         children: [
                           Text(
@@ -65,109 +66,109 @@ class SuccessBody extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(7)),
                             color: Colors.grey,
                             onPressed: () {},
-                            child: Text('Edit Profile'),
+                            child: const Text('Edit Profile'),
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 1,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Account Details',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Card & offers',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Notifications',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Delivery information',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Payment information',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Language',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Privacy settings',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(thickness: 1),
-                  SizedBox(
+                  const Divider(thickness: 1),
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Logout',
                     style: styles.textStyle14,
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],

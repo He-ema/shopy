@@ -16,7 +16,7 @@ class ShimmerWishListItem extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.2,
               opacity: 0.3,
               borderRaduis: 12),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Column(
@@ -26,7 +26,7 @@ class ShimmerWishListItem extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.02,
                   opacity: 0.3,
                   borderRaduis: 12),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Skelton(
@@ -34,7 +34,7 @@ class ShimmerWishListItem extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.02,
                   opacity: 0.3,
                   borderRaduis: 12),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Skelton(

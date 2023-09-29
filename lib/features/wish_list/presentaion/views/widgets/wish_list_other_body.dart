@@ -50,18 +50,20 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: Slidable(
-                            startActionPane:
-                                ActionPane(motion: BehindMotion(), children: [
-                              SlidableAction(
-                                label: 'Delete',
-                                onPressed: (context) async {
-                                  await deleteListItem(index, context, state);
-                                },
-                                icon: Icons.delete,
-                                backgroundColor: Colors.red,
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                            ]),
+                            startActionPane: ActionPane(
+                                motion: const BehindMotion(),
+                                children: [
+                                  SlidableAction(
+                                    label: 'Delete',
+                                    onPressed: (context) async {
+                                      await deleteListItem(
+                                          index, context, state);
+                                    },
+                                    icon: Icons.delete,
+                                    backgroundColor: Colors.red,
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                ]),
                             child: WishListItem(
                               deleteItem: callDelete,
                               wishListItemModel: state.items[index],
@@ -91,7 +93,7 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                         favourites.doc(state.items[i].id.toString()).delete();
                       }
                       // widget.isLoading();
-                      Future.delayed(Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 2), () {
                         BlocProvider.of<WishListCubit>(context)
                             .getWishListItems();
                       });
@@ -105,21 +107,21 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
                 child: Column(
               children: [
                 Expanded(child: Lottie.asset('assets/lotties/empty2.json')),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   'Your wish list is empty',
                   style: styles.textStyle26,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
               ],
             ));
           }
         } else {
-          return Expanded(child: ShimmerWishListBody());
+          return const Expanded(child: ShimmerWishListBody());
         }
       },
     );
@@ -130,12 +132,12 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
       (context, animation) {
         return SlideTransition(
           position: animation.drive(
-              Tween(begin: Offset(2, 0.0), end: Offset(0.0, 0.0))
+              Tween(begin: const Offset(2, 0.0), end: const Offset(0.0, 0.0))
                   .chain(CurveTween(curve: Curves.elasticInOut))),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: Container(
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               width: MediaQuery.of(context).size.width * 0.75,
               height: MediaQuery.of(context).size.height * 0.15,
               decoration: BoxDecoration(
@@ -151,7 +153,7 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
           ),
         );
       },
-      duration: Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 2000),
     );
   }
 
@@ -163,25 +165,25 @@ class _WishListOtherBodyState extends State<WishListOtherBody> {
         (_, animation) {
           return SlideTransition(
             position: animation.drive(
-                Tween(begin: Offset(2, 0.0), end: Offset(0.0, 0.0))
+                Tween(begin: const Offset(2, 0.0), end: const Offset(0.0, 0.0))
                     .chain(CurveTween(curve: Curves.elasticInOut))),
             // sizeFactor: animation,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: MediaQuery.of(context).size.height * 0.15,
                 decoration: BoxDecoration(
                   color: Colors.red.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: Center(child: Text('Deleted')),
+                child: const Center(child: Text('Deleted')),
               ),
             ),
           );
         },
-        duration: Duration(milliseconds: 2000),
+        duration: const Duration(milliseconds: 2000),
       );
       await favourites.doc(state.items[index].id.toString()).delete();
     }
