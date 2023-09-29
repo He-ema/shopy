@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shopy/constants.dart';
+import 'package:shopy/core/stripe_payment/payment_manager.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/core/widgets/custom_button.dart';
 import 'package:shopy/features/cart/presentaion/manager/cart_cubit/cart_cubit.dart';
@@ -75,7 +76,9 @@ class _CartOtherBodyState extends State<CartOtherBody> {
                   ),
                   CustomButton(
                     text: 'Checkout',
-                    onPressed: () {},
+                    onPressed: () async {
+                      await PaymentManager.makePayment(20, 'USD');
+                    },
                   ),
                 ],
               ),

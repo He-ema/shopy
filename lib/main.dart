@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:shopy/core/stripe_payment/stripe_keys.dart';
 import 'package:shopy/features/home/data/repos/home_repo_implementation.dart';
 import 'package:shopy/features/home/data/services/api_service.dart';
 import 'package:shopy/features/home/presentation/manager/get_products_cubit/get_products_cubit.dart';
@@ -13,6 +15,9 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = ApiKeys.publishableKey;
+  Stripe.merchantIdentifier = 'any string works';
+  await Stripe.instance.applySettings();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
