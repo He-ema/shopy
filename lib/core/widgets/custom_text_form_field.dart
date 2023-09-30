@@ -7,8 +7,10 @@ class CustomTextFormField extends StatefulWidget {
     required this.hint,
     this.isHidden = false,
     this.controller,
+    this.enabled = true,
   });
   final String hint;
+  final bool enabled;
   final bool isHidden;
   final TextEditingController? controller;
 
@@ -32,6 +34,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           return null;
         }
       },
+      enabled: widget.enabled,
       controller: widget.controller,
       obscureText: (widget.isHidden && isObsecured) ? true : false,
       decoration: InputDecoration(

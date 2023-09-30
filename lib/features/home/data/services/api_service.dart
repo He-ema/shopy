@@ -12,7 +12,7 @@ class ApiService {
       options: Options(
         headers: {
           'X-RapidAPI-Key':
-              '229abfe9cbmsh5d68b54532908eap192ab2jsnd73d04c64082',
+              '7701ce5370mshd182d531b7ff0b8p1f2791jsn9fe389c57f43',
           'X-RapidAPI-Host': 'shoes-collections.p.rapidapi.com'
         },
       ),
