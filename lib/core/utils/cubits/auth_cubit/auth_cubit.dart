@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../constants.dart';
 
 part 'auth_state.dart';
@@ -34,6 +35,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
       this.email = email;
       signedWithGoogle = false;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString(kEmail, email);
       emit(AuthSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -64,6 +67,8 @@ class AuthCubit extends Cubit<AuthState> {
       signedWithGoogle = false;
       var data = await _users.doc(email).get();
       verified = data[kVerified];
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString(kEmail, email);
       emit(AuthSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -112,6 +117,8 @@ class AuthCubit extends Cubit<AuthState> {
       });
       email = googleUser.email;
       signedWithGoogle = true;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString(kEmail, googleUser.email);
       emit(AuthSuccess());
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {

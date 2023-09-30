@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopy/core/utils/common_features/OTP/presentation/views/OTP_view.dart';
 import 'package:shopy/core/utils/common_features/success/presentation/view_models/success_view.dart';
 import 'package:shopy/features/signIn/presentation/views/signIn_view.dart';
@@ -17,6 +18,7 @@ abstract class AppRouter {
   static const forgotPasswordRoute = '/fprgotPass';
 
 // GoRouter configuration
+
   static final router = GoRouter(
     routes: [
       GoRoute(

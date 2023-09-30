@@ -53,6 +53,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   lottie: ^2.6.0
   modal_progress_hud_nsn: ^0.4.0
+  shared_preferences: ^2.2.1
   shimmer: ^3.0.0
 
 dev_dependencies:

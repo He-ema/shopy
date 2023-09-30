@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../../constants.dart';
+import '../../../../../core/utils/app_router.dart';
 import 'logo_widget.dart';
 import 'signIn_widget.dart';
 import 'signUp_widget.dart';
@@ -20,6 +24,17 @@ class _IntroViewBodyState extends State<IntroViewBody>
     // TODO: implement initState
     super.initState();
     initSlidingAnimation();
+    getEmail();
+  }
+
+  void getEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getString(kEmail) != null) {
+      animationController.stop();
+      GoRouter.of(context)
+          .pushReplacement(AppRouter.homeRoute, extra: prefs.getString(kEmail));
+    }
   }
 
   @override
