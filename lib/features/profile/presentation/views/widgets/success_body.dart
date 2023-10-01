@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,10 +10,12 @@ import 'package:shopy/features/profile/presentation/views/widgets/bottom_sheet_b
 import '../../../../../constants.dart';
 import '../../../../../core/utils/assetData.dart';
 import '../../../data/user_model/user_model.dart';
+import '../../manager/cubit/profile_cubit.dart';
 
 class SuccessBody extends StatelessWidget {
-  const SuccessBody({super.key, required this.user});
+  const SuccessBody({super.key, required this.user, required this.update});
   final UserModel user;
+  final VoidCallback update;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,8 +71,8 @@ class SuccessBody extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7)),
                             color: Colors.grey,
-                            onPressed: () {
-                              showModalBottomSheet(
+                            onPressed: () async {
+                              await showModalBottomSheet(
                                 enableDrag: true,
                                 isScrollControlled: true,
                                 shape: const RoundedRectangleBorder(
@@ -80,10 +83,13 @@ class SuccessBody extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return BottomSheetBody(
+                                    update: update,
                                     userModel: user,
                                   );
                                 },
                               );
+                              await BlocProvider.of<ProfileCubit>(context)
+                                  .getUserData(user.email);
                             },
                             child: const Text('Edit Profile'),
                           ),
@@ -117,10 +123,14 @@ class SuccessBody extends StatelessWidget {
 
                       GoRouter.of(context).pushReplacement('/');
                     },
-                    child: const Text(
-                      'Logout',
-                      style: styles.textStyle14,
-                      textAlign: TextAlign.start,
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Logout',
+                          style: styles.textStyle14,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
                     ),
                   ),
                 ],

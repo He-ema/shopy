@@ -25,8 +25,15 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
+        void update() {
+          setState(() {});
+        }
+
         if (state is ProfileSuccess) {
-          return SuccessBody(user: state.user);
+          return SuccessBody(
+            user: state.user,
+            update: update,
+          );
         } else if (state is ProfileFailure) {
           return Center(
             child: Text(state.errorMessage),
