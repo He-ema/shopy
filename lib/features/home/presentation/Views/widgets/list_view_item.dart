@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shopy/constants.dart';
+import 'package:shopy/core/utils/app_router.dart';
 import 'package:shopy/core/utils/styles.dart';
 import 'package:shopy/features/home/data/product_model/product_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -44,89 +46,94 @@ class _ListViewItemState extends State<ListViewItem> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          // width: 150,
-          // height: 250,
-          width: MediaQuery.of(context).size.width * 0.4,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  height: 150,
-                  child: CachedNetworkImage(
-                    imageUrl: widget.productModel.image!,
-                    // ignore: prefer_const_constructors
-                    placeholder: (context, url) => SpinKitSpinningLines(
-                      color: kPrimaryColor,
+        GestureDetector(
+          onTap: () {
+            GoRouter.of(context)
+                .push(AppRouter.detailsRoute, extra: widget.productModel);
+          },
+          child: Container(
+            // width: 150,
+            // height: 250,
+            width: MediaQuery.of(context).size.width * 0.4,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Hero(
+                    tag: widget.productModel.id.toString(),
+                    child: Container(
+                      height: 150,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.productModel.image!,
+                        // ignore: prefer_const_constructors
+                        placeholder: (context, url) => SpinKitSpinningLines(
+                          color: kPrimaryColor,
+                        ),
+                        maxHeightDiskCache: 100,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
-                    maxHeightDiskCache: 100,
-                    fit: BoxFit.fitWidth,
                   ),
-                ),
-                // Image.asset(
-                //   AssetData.test, fit: BoxFit.fitWidth,
-                //   //width: 180,
-                // ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  widget.productModel.name!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: styles.textStyle14,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      margin: const EdgeInsets.only(
-                        top: 3,
-                        bottom: 8,
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    widget.productModel.name!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: styles.textStyle14,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.only(
+                          top: 3,
+                          bottom: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xffD5DDE0),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(
+                          '5 Colors',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Montserrat'),
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xffD5DDE0),
-                        borderRadius: BorderRadius.circular(4),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '\$' '${widget.productModel.price}',
+                        style: styles.textStyle14.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff3E4958)),
                       ),
-                      child: const Text(
-                        '5 Colors',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Montserrat'),
+                      const Spacer(),
+                      GestureDetector(
+                        child: const Icon(
+                          Icons.add,
+                          size: 15,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '\$' '${widget.productModel.price}',
-                      style: styles.textStyle14.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff3E4958)),
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      child: const Icon(
-                        Icons.add,
-                        size: 15,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    )
-                  ],
-                )
-              ],
+                      const SizedBox(
+                        width: 20,
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
