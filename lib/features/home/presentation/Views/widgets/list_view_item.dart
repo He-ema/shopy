@@ -47,9 +47,13 @@ class _ListViewItemState extends State<ListViewItem> {
     return Stack(
       children: [
         GestureDetector(
-          onTap: () {
-            GoRouter.of(context)
+          onTap: () async {
+            var result = await GoRouter.of(context)
                 .push(AppRouter.detailsRoute, extra: widget.productModel);
+            if (result == 'Returned') {
+              check();
+              setState(() {});
+            }
           },
           child: Container(
             // width: 150,
@@ -174,6 +178,11 @@ class _ListViewItemState extends State<ListViewItem> {
     await doc.get().then((doc) {
       if (doc.exists) {
         docExist = true;
+        if (this.mounted) {
+          setState(() {});
+        }
+      } else {
+        docExist = false;
         if (this.mounted) {
           setState(() {});
         }
